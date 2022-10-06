@@ -77,7 +77,7 @@ BEGIN
 			SELECT ISNULL(i.FormDesignID,0),ISNULL(ui.UIElementID,0),
 			'Expression rule display text for element '+ ui.Label +' is changed from '+ ISNULL(d.DisplayText,'None')  + ' to '+ ISNULL(i.DisplayText,'None') ,	
 			i.AddedBy , i.AddedDate , ISNULL(i.UpdatedBy, d.UpdatedBy) , GETDATE(), ui.UIElementName, ui.Label,ISNULL(i.FormDesignVersionID,0)	 
-			FROM deleted d inner join inserted i ON d.DocumentRuleID=i.DocumentRuleID inner join UI.UIElement ui ON ui.UIElementID=d.TargetUIElementID 
+			FROM [cdc].[UI_DocumentRule_CT] d inner join [cdc].[UI_DocumentRule_CT] i ON d.DocumentRuleID=i.DocumentRuleID inner join UI.UIElement ui ON ui.UIElementID=d.TargetUIElementID 
 		END;
 
 		If (@dDesc<>@iDesc)
@@ -87,7 +87,7 @@ BEGIN
 			SELECT ISNULL(i.FormDesignID,0),ISNULL(ui.UIElementID,0),
 			'Expression rule description for element '+ ui.Label +' is changed from '+ ISNULL(d.[Description],'None')  + ' to '+ ISNULL(i.[Description],'None') ,
 			i.AddedBy , i.AddedDate , ISNULL(i.UpdatedBy, d.UpdatedBy) , GETDATE(), ui.UIElementName, ui.Label,ISNULL(i.FormDesignVersionID,0)
-			FROM deleted d inner join inserted i ON d.DocumentRuleID=i.DocumentRuleID inner join UI.UIElement ui ON ui.UIElementID=d.TargetUIElementID 
+			FROM [cdc].[UI_DocumentRule_CT] d inner join [cdc].[UI_DocumentRule_CT] i ON d.DocumentRuleID=i.DocumentRuleID inner join UI.UIElement ui ON ui.UIElementID=d.TargetUIElementID 
 		END;
 
 		If (@dRuleJSON<>@iRuleJSON)
@@ -97,7 +97,7 @@ BEGIN
 			SELECT ISNULL(i.FormDesignID,0),ISNULL(ui.UIElementID,0),	
 			'Expression rule for element '+ ui.Label +' updated',	
 			i.AddedBy , i.AddedDate , ISNULL(i.UpdatedBy, d.UpdatedBy) , GETDATE(), ui.UIElementName, ui.Label,ISNULL(i.FormDesignVersionID,0)
-			FROM deleted d inner join inserted i ON d.DocumentRuleID=i.DocumentRuleID inner join UI.UIElement ui ON ui.UIElementID=d.TargetUIElementID 
+			FROM [cdc].[UI_DocumentRule_CT] d inner join [cdc].[UI_DocumentRule_CT] i ON d.DocumentRuleID=i.DocumentRuleID inner join UI.UIElement ui ON ui.UIElementID=d.TargetUIElementID 
 		END;
 
 		INSERT INTO [Trgr].[DocumentRule]
